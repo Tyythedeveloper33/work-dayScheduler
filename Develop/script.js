@@ -21,3 +21,13 @@ $(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 });
+
+// creating date element & appending date element
+var dayWeek = dayjs()
+$("#currentDay").text(dayWeek.format('[today is] dddd'));
+ 
+$("#colorKey").text('Grey = Past-Time, Red = Current-Time, Green = Future-Time');
+
+
+
+ 
