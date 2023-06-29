@@ -22,11 +22,57 @@ $(function () {
   // TODO: Add code to display the current date in the header of the page.
 });
 
-// creating date element & appending date element
-var dayWeek = dayjs()
-$("#currentDay").text(dayWeek.format('[today is] dddd'));
+//get current hour using Day.js in 12-hour format
+var currentHour = dayjs().format("H");
+// shows the displayed hour in the console
+console.log(currentHour);
+var timeBlocks = document.getElementsByClassName("time-block");
+for (var i = 0; i < timeBlocks.length; i++) {
+  var block = timeBlocks[i];
+  
+  var blockHour = block.id.split("-")[1]
+  
+var integer = parseInt(blockHour)
+
+  // remove "AM" or "PM" from block hour
+ // blockHour = blockHour.slice(0, -2);
+  //if (dayjs(blockHour, "H").isBefore(dayjs(currentHour, "H"), "hour")) {
+    if( integer < currentHour) {
+    // past time block
+    
+    block.classList.add("past");
+  } else if (blockHour === currentHour) {
+    // current time block
+    
+    block.classList.add("present");
+  } else {
+    // future time block
+    
+    block.classList.add("future");
+  }
+};
+// creating dat}e element & appending date element
+var dayWeek = dayjs().format('dddd M/D/YY');
+document.getElementById("currentDay").textContent = "Today is " + dayWeek;
+document.getElementById("colorKey").textContent = 'Grey = Past-Time, Red = Current-Time, Green = Future-Time';
  
-$("#colorKey").text('Grey = Past-Time, Red = Current-Time, Green = Future-Time');
+//loop through each time block
+//$(".time-block").each(function() {
+// extract the hour from the timeblocks id
+//var blockHour = parseInt($(this).attr("id").split("-")[1]);
+//console.log(blockHour)
+// compare the block hour with the current hour
+//if(blockHour < currentHour) {
+  //past time block
+  //$(this).removeClass("present", "future").addClass("past");
+//} else if(blockHour === currentHour) {
+  //current time block
+ // $(this).removeClass("past", "future").addClass("present");
+//} else{
+  //future time block
+ // $(this).removeClass("past", "present").addClass("future");
+//}
+//});
 
 
 
