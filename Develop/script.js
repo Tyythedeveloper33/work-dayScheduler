@@ -74,6 +74,33 @@ document.getElementById("colorKey").textContent = 'Grey = Past-Time, Red = Curre
 //}
 //});
 
-
-
+//function to save the user input to local storage
+function saveToLocalStorage(){
+const timeBlocks = document.getElementsByClassName("time-block");
+  for (var i = 0; i < timeBlocks.length; i++) {
+    const block = timeBlocks[i];
+    const id = block.id;
+    const description = block.querySelector(".description").value;
+    localStorage.setItem(id, description);
+  }
+  }
+// function to load saved user input from local storage
+function loadFromLocalStorage(){
+  const timeBlocks = document.getElementsByClassName("time-block");
+  for (var i = 0; i < timeBlocks.length; i++) {
+    const block = timeBlocks[i];
+    const id = block.id;
+    const savedDescription = localStorage.getItem(id);
+    if(savedDescription){
+      block.querySelector(".description").value = savedDescription
+    }
+  }
+}
+// save button click event handler
+const saveButtons = document.querySelectorAll(".saveBtn");
+saveButtons.forEach((button)=> {
+  button.addEventListener("click", saveToLocalStorage);
+});
+// load saved data on page load
+document.addEventListener("DOMContentLoaded", loadFromLocalStorage);
  
